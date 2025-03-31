@@ -5,6 +5,10 @@ const fs=require('fs');//inbuild of node js
 const { json } = require('stream/consumers');
 const path='abishek.txt';
 app.use(express.json());
+const db=require('./db');
+
+db.connection
+
 app.get('/',(req,res)=>{
     res.json({
         mesaage:'Hello i am get'
@@ -31,11 +35,19 @@ app.post('/',(req,res)=>{
 app.put('/:query',(req,res)=>{
     const {query}=req.params;
     console.log(query);
-    const{id,name,email,password,}=req.body;
+    const{id,name,email,password}=req.body;
     //TODO: handle....where i doesnt exist
 //readfile using fs.readfile
 //update data using
+fs.readFile(path, 'utf-8', (err, data) => {
+if (err) throw err;
+console.log('file is reading'+data)
+});
+fs.writeFile(path,JSON.stringify(email),(err)=>{
+    if (err)throw error;
+    console.log('change is happen');
 
+})
 
 });
 app.listen(3002,()=>{
